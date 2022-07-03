@@ -1,7 +1,6 @@
 package com.bridgelabz;
 
-public class EmployeeWage {
-
+public class EmployeeWage implements IEmpWage {
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
 
@@ -9,7 +8,6 @@ public class EmployeeWage {
     private CompanyEmpWage[] companyEmpWageArray;
 
     public EmployeeWage() {
-
         companyEmpWageArray = new CompanyEmpWage[2];
     }
 
@@ -28,8 +26,10 @@ public class EmployeeWage {
 
     public int computeEmpWage(CompanyEmpWage companyEmpWage) {
 
-        int empHrs = 0, totalEmpHrs = 0, totalEmpWage = 0, totalWorkingDays = 0;
-
+        int empHrs = 0;
+        int totalEmpHrs = 0;
+        int totalEmpWage = 0;
+        int totalWorkingDays = 0;
 
         while (totalWorkingDays <= companyEmpWage.getNumOfWorkingDays() && totalEmpHrs < companyEmpWage.getMaxHoursPerMonth()) {
             totalWorkingDays++;
@@ -47,16 +47,17 @@ public class EmployeeWage {
             int empWage = empHrs * companyEmpWage.getEmpRatePerHour();
             totalEmpHrs += empHrs;
             totalEmpWage += empWage;
-
         }
         return totalEmpWage;
     }
 
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
-
+        System.out.println("Welcome to EmployeeWage");
         employeeWage.addCompanyEmpWage("TCS", 20, 20, 100);
-        employeeWage.addCompanyEmpWage("INFOSYS", 10, 15, 90);
+        employeeWage.addCompanyEmpWage("INFOSYS", 10, 15, 100);
         employeeWage.computeEmpWage();
     }
 }
+
+
