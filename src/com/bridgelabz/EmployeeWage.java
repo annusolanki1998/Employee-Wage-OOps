@@ -58,7 +58,6 @@ public class EmployeeWage {
         employeeWage.addCompanyEmpWage("HCL", 15, 25, 100);
         employeeWage.computeEmpWage();
     }
-
 }
 
 
