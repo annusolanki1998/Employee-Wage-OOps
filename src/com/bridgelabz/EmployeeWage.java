@@ -1,26 +1,34 @@
 package com.bridgelabz;
 
-public class EmployeeWage implements IEmpWage {
+import java.util.ArrayList;
+
+public class EmployeeWage {
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
 
     private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
+    static ArrayList<CompanyEmpWage> companyEmpWageArray = new ArrayList<CompanyEmpWage>();
 
-    public EmployeeWage() {
-        companyEmpWageArray = new CompanyEmpWage[2];
+    public static void main(String[] args) {
+        EmployeeWage employeeWage = new EmployeeWage();
+        System.out.println("Welcome to EmployeeWage");
+        employeeWage.addCompanyEmpWage("TCS", 20, 20, 100);
+        employeeWage.addCompanyEmpWage("INFOSYS", 10, 15, 100);
+        employeeWage.addCompanyEmpWage("HCL", 15, 25, 100);
+        employeeWage.computeEmpWage();
     }
 
 
     public void addCompanyEmpWage(String companyName, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
+        companyEmpWageArray.add(companyEmpWage);
     }
 
     public void computeEmpWage() {
-        for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+        for (int i = 0; i < companyEmpWageArray.size(); i++) {
+            CompanyEmpWage companyEmpWage = companyEmpWageArray.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
     }
 
@@ -51,13 +59,7 @@ public class EmployeeWage implements IEmpWage {
         return totalEmpWage;
     }
 
-    public static void main(String[] args) {
-        EmployeeWage employeeWage = new EmployeeWage();
-        System.out.println("Welcome to EmployeeWage");
-        employeeWage.addCompanyEmpWage("TCS", 20, 20, 100);
-        employeeWage.addCompanyEmpWage("INFOSYS", 10, 15, 100);
-        employeeWage.computeEmpWage();
-    }
 }
+
 
 
